@@ -3,44 +3,54 @@
 ## Table of contents
 * [Introduction](#introduction)
 * [Background](#background)
-* [Dependencies](#dependencies)
+* [Dependencies](#dependencies-&-technologies)
+* [Features](#parts)
 * [Local Setup](#local-setup)
-* [Features](#features)
 * [Status](#status)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## Introduction
 
-For a more detailed tutorial of how to use this applicaion in praxis, visit my [Website](http://schroederjan.com/). `(COMING SOON)`
+For a more detailed tutorial of how this infrastructure works visit my [Website](http://schroederjan.com/). `COMING SOON`
 
 ## Background
 
 ![](man/featured.png)
 
-## Dependencies
+## Dependencies & Technologies
+
+* [`R`]() as scripting language for data preparation and prediction algorithms based on `R`. Also used for the user interface, a `Shiny` application.
+* [Python]() as scripting language for `Airflow` and prediction algorithms based on `Python`.
+* [Shiny Server]() as `R` engine that will run the scripts and the user interface, a `Shiny` application.
+* [TimescaleDB]() as time series database build on top of Postgres that will hold all data. `TimescaleDB`
+* [Airflow]() as scheduling work-flow manager to coordinate the whole infrastructure. `Airflow`
+
+## Parts
+* [Step 1] Connect to different data sources using `R`.
+* [Step 2] Prepare and clean the data, then store it to the time series database using `R`.
+* [Step 3] Run Prediction and other algorithms on the data stored in the `TimescaleDB` using `R` and `Python`.
+* [Step 4] Visualize the data and results for insight using `R` in `Shiny`.
 
 ## Local Setup
 
-## Features:
-* Upload your own time-series data as a .csv file
-* Upload and add external regressors (errors) to your input data `(COMING SOON)`
-* Test your time series data with basic statistical tests
-* Use advanced statistical tests for your algorithms such as cross-validation `(COMING SOON)`
-* Predict your time series data and check the model based on residuals
-* Download a full report of your findings `(COMING SOON)`
+`COMING SOON`
 
 ## Status
-The project is _in progress_ and will be expanded with new features soon.
-My goal is it to build a state of the art "Prediction Tool" application template that anyone can customize or expand at will.
+The project is _in progress_ and will be expanded with new features repeatedly.
+My goal is it to build a state of the art "Time Series Prediction Infrastructure" that others can customize or expand at will to their needs.
 
 ### To-do list:
 
-## Inspiration
-If you like to learn more about R, Shiny or Predictive Analytics, you can check out these links below.
+`COMING SOON`
 
-* [Business Science University](https://university.business-science.io/)
-* [Rob J Hyndman](https://robjhyndman.com/publications/)
+## Inspiration
+
+* [Business Science University](https://university.business-science.io/) for `Shiny`
+* [Rob J Hyndman](https://robjhyndman.com/publications/) for `R`
+* [Timescale](https://www.timescale.com/) for `TimescaleDB`
+* [Apache Airflow](https://airflow.apache.org/) for `Airflow`
+* [Xmind](https://www.xmind.net/xmind2020/) for the tool of my illustrations.
 
 ## Contact
 Created by [Jan Schroeder](https://www.schroederjan.com/) - feel free to contact me!
