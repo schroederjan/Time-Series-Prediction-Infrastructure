@@ -65,7 +65,7 @@ CREATE TABLE rides_length(
 );
 SELECT create_hypertable('rides_length', 'three_hour');
 
-INSERT INTO rides_count
+INSERT INTO rides_length
   SELECT time_bucket_gapfill('3 hour', pickup_datetime, '2016-01-01 00:00:00','2016-01-31 23:59:59') AS three_hour,
     locf(AVG(trip_length)) AS length
   FROM rides
