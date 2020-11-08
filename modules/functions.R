@@ -29,7 +29,7 @@ prepare_for_prediction <- function(data){
 }
 
 # to prepare the results of the prediction modules for visualization
-prepare_for_visual <- function(fc.fit, ts_data.train, ts_data.test){
+prepare_for_visual <- function(fc.fit, ts_data.train, ts_data.test, h){
   
   
   # create future dates for the time horizon predicted
