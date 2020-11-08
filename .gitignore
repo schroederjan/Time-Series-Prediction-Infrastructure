@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-SECURITY/
+*.yml
 *.csv
 *.tar.gz
