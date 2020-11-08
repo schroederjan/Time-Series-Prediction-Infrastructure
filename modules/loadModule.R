@@ -10,7 +10,6 @@
 #CONFIGURATIONS
 #uncomment when testing standalone
 #config = yaml.load_file("config.yml") #password from yml file 
-config = yaml.load_file("modules/config.yml") #password from yml file 
 
 #
 #USER INTERFACE
