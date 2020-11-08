@@ -4,11 +4,10 @@
 #Sources
 ###
 
-config = yaml.load_file("modules/config.yml") #password from yml file 
-
 source("modules/packages.R")
 source("modules/functions.R")
 
+config = yaml.load_file("modules/config.yml") #password from yml file 
 source("modules/loadModule.R")
 #source("modules/predictModule.R")
 
