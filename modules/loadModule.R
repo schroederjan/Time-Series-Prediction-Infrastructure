@@ -10,6 +10,13 @@
 #CONFIGURATIONS
 #uncomment when testing standalone
 #config = yaml.load_file("config.yml") #password from yml file 
+# database configurations
+con <- dbConnect(RPostgres::Postgres(),
+                 dbname = 'nyc_data', 
+                 host = 'localhost',
+                 port = 5432,
+                 user = 'postgres',
+                 password = config$TIMESCALEDB$PW)
 
 #
 #USER INTERFACE
@@ -21,10 +28,10 @@ loadUI <- function(id, label = "load_data") {
   ns <- NS(id)
   
   tagList(
-    sliderInput(ns("time_config"), "time_config", min = 10, max = 120, value = 60, step = 10),
-    textInput(ns("table_config"), "table_config", value = "rides"),
-    textInput(ns("value_config"), "value_config", value = "COUNT(*)"),
-    textInput(ns("index_config"), "index_config", value = "pickup_datetime")
+    numericInput(ns("time_config"), "Aggregate to 'x minutes' time periods", min = 10, value = 60),
+    textInput(ns("table_config"), "Choose table in database", value = "rides"),
+    textInput(ns("value_config"), "Choose aggregation function for values", value = "COUNT(*)"),
+    textInput(ns("index_config"), "Choose index column (datetime)", value = "pickup_datetime")
   )
 }
 
