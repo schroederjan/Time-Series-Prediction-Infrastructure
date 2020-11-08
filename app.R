@@ -6,20 +6,18 @@
 
 source("modules/packages.R")
 source("modules/functions.R")
-
 config = yaml.load_file("modules/config.yml") #password from yml file 
 source("modules/loadModule.R")
-#source("modules/predictModule.R")
-
+source("modules/predictModule.R")
 
 ###
 #UI
 ###
-
-ui <- dashboardPage(
-  dashboardHeader(title = "Interactive Analytics with TimescaleDB"),
   
-  #SIDEBAR
+ui <- dashboardPage(
+  skin = "black",
+  dashboardHeader(title = "Interactive Prediction Dashboard with TimescaleDB", titleWidth = 350),
+  
   dashboardSidebar(
     sidebarMenu(
       menuItem("Step 1: Load", tabName = "load", icon = icon("upload")),
@@ -28,17 +26,17 @@ ui <- dashboardPage(
     )
   ),
   
-  #BODY
   dashboardBody(
     tabItems(
       
       #####
       # First tab content
       #####
+      
       tabItem(tabName = "load",
-              
               fluidPage(
                 
+                #ROW 1
                 fluidRow(
                   column(3,
                          h4("Database Configurations"),
@@ -49,6 +47,7 @@ ui <- dashboardPage(
                          dygraphOutput("overview_dygraph"))
                 ),
                 
+                #ROW 2
                 fluidRow(
                   column(6,
                          h4("Test 1: Autcorrelation Function"),
@@ -59,16 +58,17 @@ ui <- dashboardPage(
                          h4("Test 2: Partial Autcorrelation Function"),
                          plotOutput("test.pacf")
                          )
+                  
                   )
                 )
-              ),
+              ), #tabitem.end
       
       #####
       # Second tab content
       #####
       
       tabItem(tabName = "test",
-              h2("Work in progress:")
+              h2("COMING SOON")
               ),
       
       #####
@@ -76,22 +76,57 @@ ui <- dashboardPage(
       #####
       
       tabItem(tabName = "predict",
-              h2("Work in progress:")
-              ),
+              fluidPage(
+                
+                #ROW 1
+                fluidRow(
+                  column(12,
+                         h3("Interactive Plot for the Overview"),
+                         dygraphOutput("dygraph.fc")
+                  )
+                ),
+                
+                hr(),
+                
+                #ROW 2
+                fluidRow(
+                  column(4,
+                         h3("Model Configurations"),
+                         predictUI("predictModule")
+                  ),
+                  column(8,
+                         h3("Prediction Interval Plot (PI)"),
+                         plotOutput("plot.fc")
+                  )
+                ),
+                
+                #ROW 3
+                fluidRow(
+                  column(6,
+                         h3("Model Residuals"),
+                         plotOutput("plot.res")
+                  ),
+                  column(6,
+                         h3("Training & Testing Accuracy"),
+                         tableOutput("acc.tr")
+                  )
+                )
+              )
+      )
       
-    ), #tabitems.end
-  ) #dashboardbody.end
-) #ui.end
+      ) #tabitems.end
+    ) #dashboardbody.end
+  ) #ui.end
 
 ###
 #SERVER
 ###
 
-server <- function(input, output, session) {
+server <- function(input, output) {
   
   ###
   #Step 1
-  #LOADED DATA
+  #LOAD
   ###
   
   data <- loadServer("config")
@@ -116,11 +151,39 @@ server <- function(input, output, session) {
   #DATA Testing
   ###
   
+  #COMING SOON
+  
   ###
   #Step 3
   #PREDICTION
   ###
-    
+  
+  result.list  <- reactive({
+    data <- data()
+    result <- predictServer("predictModule", data)
+  })
+  
+  output$dygraph.fc <- renderDygraph({
+    results <- result.list()
+    visualize_ts(results()[[1]])
+  })
+  
+  output$acc.tr <- renderTable({
+    results <- result.list()
+    ts.acc <- results()[[2]]
+  })
+  
+  output$plot.fc <- renderPlot({
+    results <- result.list()
+    ts.plot <- plot(results()[[4]])
+  })
+  
+  output$plot.res <- renderPlot({
+    results <- result.list()
+    results()[[3]] %>% checkresiduals()
+  })
+  
+  
 }
 
 shinyApp(ui, server)
