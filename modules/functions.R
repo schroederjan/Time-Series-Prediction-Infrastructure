@@ -85,8 +85,8 @@ prepare_for_visual <- function(fc.fit, ts_data.train, ts_data.test, h){
   names(ts.extended) <- c("Actual", "Prediction", "Test", "Fit")
   
   # Accuracy
-  fit.accuracy <- accuracy(fc.fit) %>% data.frame()
-  fc.accuracy <- accuracy(fc.fit$mean, x = df.test$value) %>% data.frame()
+  fit.accuracy <- accuracy(fc.fit) %>% data.frame() %>% mutate(Key = "Training Accuracy")
+  fc.accuracy <- accuracy(fc.fit$mean, x = df.test$value) %>% data.frame() %>% mutate(Key = "Testing Accuracy")
   result.accuracy <- bind_rows(fit.accuracy, fc.accuracy)
   
   function.list <- list(result.accuracy, ts.extended)
@@ -100,9 +100,42 @@ prepare_for_visual <- function(fc.fit, ts_data.train, ts_data.test, h){
 visualize_ts <- function(ts){
   dygraph_result <- dygraph(ts) %>% 
     dyRangeSelector() %>% 
-    dyOptions(drawPoints = F, pointSize = 2, colors = RColorBrewer::brewer.pal(4, "BrBG")[c(4, 2, 3, 1)]) %>% 
+    dyOptions(drawPoints = F, pointSize = 2, colors = c("black", "green", "blue", "red")) %>% 
     dyUnzoom() %>% 
     dyCrosshair(direction = "vertical") %>% 
     dyLegend(width = 400)
   return(dygraph_result)
+}
+
+# to split data into test and training data based on percentage split
+split_ts_data <- function(data, split_percent){
+  h <- floor(nrow(data)*split_percent)
+  data_train <- head(data, round(length(data) - h))
+  data_test <- tail(data, h)
+  ret.list <- list(data_train, data_test, h)
+  return(ret.list)
+}
+
+# part of the crossvaldation process (work on complete function)
+crossvalidate_data <- function(data, split_percent){
+  
+  #split
+  tmp <- split_ts_data(data, split_percent)
+  data_train <- tmp[[1]] %>% mutate(key = "actual")
+  data_test <- tmp[[2]] %>% mutate(key = "test")
+  h <- tmp[[3]] 
+  #data <- bind_rows(data_train, data_test)
+  
+  #df to ts
+  ts_data.train <- prepare_for_prediction(data_train)
+  ts_data.test <- prepare_for_prediction(data_test)
+  
+  #predict
+  fit <- nnetar(ts_data.train)
+  fc.fit <- forecast(fit, h = nrow(data_test), PI = F, npaths = 100)
+  
+  #results
+  result <- prepare_for_visual(fc.fit, ts_data.train, ts_data.test, h)
+  result.list <- list(result,data_train)
+  return(result.list)
 }
