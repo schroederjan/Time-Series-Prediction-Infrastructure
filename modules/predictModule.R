@@ -1,11 +1,11 @@
 # Predict Module
 
 #uncomment for testing
-#source("packages.R")
-#source("loadModule.R")
-#source("functions.R")
+source("packages.R")
+source("loadModule.R")
+source("functions.R")
 #get password information from yml file
-#config = yaml.load_file("config.yml")
+config = yaml.load_file("config.yml")
 
 #
 #USER INTERFACE
