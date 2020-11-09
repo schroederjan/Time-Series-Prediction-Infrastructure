@@ -4,12 +4,12 @@
 
 #PACKAGES
 #uncomment when testing standalone
-#source("packages.R")
-#source("functions.R")
+source("packages.R")
+source("functions.R")
 
 #CONFIGURATIONS
 #uncomment when testing standalone
-#config = yaml.load_file("config.yml") #password from yml file 
+config = yaml.load_file("config.yml") #password from yml file 
 # database configurations
 con <- dbConnect(RPostgres::Postgres(),
                  dbname = 'nyc_data', 
