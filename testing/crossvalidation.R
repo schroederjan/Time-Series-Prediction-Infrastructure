@@ -30,7 +30,7 @@ value_config = "COUNT(*)" #choose the function/table that contains the values
 table_config = "rides" #choose table in database
 
 # percentage to split data
-split_percent <- 0.25
+split_percent <- 0.2
 
 ####
 #IMPORT ---------------------------------------------------------------------------
