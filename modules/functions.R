@@ -100,7 +100,7 @@ prepare_for_visual <- function(fc.fit, ts_data.train, ts_data.test, h){
 visualize_ts <- function(ts){
   dygraph_result <- dygraph(ts) %>% 
     dyRangeSelector() %>% 
-    dyOptions(drawPoints = F, pointSize = 2, colors = c("black", "green", "blue", "red")) %>% 
+    dyOptions(drawPoints = F, pointSize = 2, colors = c("black", "red", "green", "blue")) %>% 
     dyUnzoom() %>% 
     dyCrosshair(direction = "vertical") %>% 
     dyLegend(width = 400)
