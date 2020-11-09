@@ -123,7 +123,7 @@ server <- function(input, output, session) {
   value_config = "COUNT(*)" #choose the function/table that contains the values
   table_config = "rides" #choose table in database
   
-  data <- import_data_from_db(con, time_config, index, value, table)
+  data <- import_data_from_db(con, time_config, index_config, value_config, table_config)
   
   #
   # TESTING VARIABLES END  -----------------------------------------------------
