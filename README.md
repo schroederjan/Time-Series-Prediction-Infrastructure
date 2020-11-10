@@ -1,4 +1,5 @@
 # Time Series Prediction Infrastructure
+> Concept for a scalable infrastructure approach to modern analytics for time series data.
 
 ## Table of contents
 * [Introduction](#introduction)
