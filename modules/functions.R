@@ -15,6 +15,7 @@ ORDER BY index
            ;"))
   data <- data.tmp %>% 
     mutate(value = as.numeric(value))
+  data[is.na(data)] = 0 #replacing NA with 0
   return(data)
 }
 
