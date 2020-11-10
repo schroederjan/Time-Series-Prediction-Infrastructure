@@ -71,6 +71,7 @@ My goal is it to build a state of the art "Time Series Prediction Infrastructure
 
 ## Inspiration
 
+* [Udacity's Data Engineering Nanodegree](https://www.udacity.com/course/data-engineer-nanodegree--nd027) for learning Data Engineering
 * [Business Science University](https://university.business-science.io/) for `Shiny` and `R` for Data Science
 * [Rob J Hyndman](https://robjhyndman.com/publications/) for statistics with `R` 
 * [Timescale](https://www.timescale.com/) for `TimescaleDB`
