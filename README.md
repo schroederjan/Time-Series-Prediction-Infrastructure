@@ -38,9 +38,9 @@ Each of the core technologies has a sub-readme linked to it for a deep dive. `CO
 * [`Python`](https://www.python.org/) as scripting language for `Airflow` and prediction algorithms based on `Python`.
 
 ### Core Technologies
-* [`Shiny Server`]() as `R` engine that will run the scripts and the user interface, a `Shiny` application.
-* [`TimescaleDB`]() as time series database build on top of Postgres that will hold all data. `TimescaleDB`
-* [`Airflow`]() as scheduling work-flow manager to coordinate the whole infrastructure. `Airflow`
+* [`Shiny Server`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny) as `R` engine that will run the scripts and the user interface, a `Shiny` application.
+* [`TimescaleDB`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/timescaledb) as time series database build on top of Postgres that will hold all data. `TimescaleDB`
+* [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow) as scheduling work-flow manager to coordinate the whole infrastructure. `Airflow`
 
 ## Dataflows
 * [Step 1] Connect to different data sources using `R`.
