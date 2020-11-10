@@ -1,11 +1,12 @@
+#
 # Predict Module
+#
 
 #uncomment for testing
-source("packages.R")
-source("loadModule.R")
-source("functions.R")
-#get password information from yml file
-config = yaml.load_file("config.yml")
+#source("packages.R")
+#source("loadModule.R")
+#source("functions.R")
+#config = yaml.load_file("config.yml") #get password information from yml file
 
 #
 #USER INTERFACE
@@ -15,7 +16,7 @@ predictUI <- function(id) {
   ns <- NS(id)
 
   tagList(
-    numericInput(ns("h"), label = "Time horizon for train/test split in 'x' steps forward", min = 1, value = 10),
+    numericInput(ns("split_percent"), label = "Percentage for testing set from the dataset", min = 10, value = 20, max = 50),
     checkboxInput(ns("pi"), label = "Activate prediction intervals (PI)?", value = F),
     numericInput(ns("npaths"), label = "How many times will the model be run (only possible when 'PI' is ON)?", min = 1, value = 100)
     )
@@ -30,15 +31,18 @@ predictServer <- function(id, data) {
     id,
     function(input, output, session) {
       
-      h <- input$h
+      split_percent <- (input$split_percent)/100
       pi <- input$pi
       npaths <- input$npaths
       
       result.list <- reactive({
         
         # split into train-test data according to prediction horizon
-        data_train <- head(data, round(length(data) - h))
-        data_test <- tail(data, h)
+        tmp <- split_ts_data(data, split_percent)
+        data_train <- tmp[[1]]
+        data_test <- tmp[[2]]
+        #getting the prediction horizon "h" from the length of test (~=split_percent)
+        h <- tmp[[3]] 
         
         # transform data into time-series
         ts_data.test <- prepare_for_prediction(data_test)
@@ -85,10 +89,11 @@ ui <- fluidPage(
            h3("Model Configurations"),
            predictUI("predictModule")
            ),
-    column(8,
-           h3("Prediction Interval Plot (PI)"),
-           plotOutput("plot.fc")
-           )
+    column(6,
+           h3("Training & Testing Accuracy"),
+           tableOutput("acc.tr")
+    )
+
     ),
 
   fluidRow(
@@ -97,9 +102,10 @@ ui <- fluidPage(
            plotOutput("plot.res")
     ),
     column(6,
-           h3("Training & Testing Accuracy"),
-           tableOutput("acc.tr")
-           )
+           h3("Prediction Interval Plot (PI)"),
+           plotOutput("plot.fc")
+    )
+
   )
 )
 
