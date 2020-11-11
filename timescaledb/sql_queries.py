@@ -43,8 +43,6 @@ CREATE TABLE rides
     tolls_amount NUMERIC,
     improvement_surcharge NUMERIC,
     total_amount NUMERIC
-    pickup_geom geometry(POINT,2163)
-    dropoff_geom geometry(POINT,2163)
 );
 SELECT create_hypertable('rides', 'pickup_datetime', 'payment_type', 2, create_default_indexes=>FALSE);
 CREATE INDEX ON rides (vendor_id, pickup_datetime desc);
@@ -69,14 +67,6 @@ CREATE TABLE rates
 );
 """)
 
-# COPY
-
-rates_copy = ("""
-COPY rides 
-FROM 'data\nyc_data_rides.csv' 
-CSV; 
-""")
-
 # INSERT TABLES
 
 payment_type_table_insert = (""" INSERT INTO payment_types(payment_type, description) VALUES
@@ -99,9 +89,12 @@ rates_table_insert = (""" INSERT INTO rates(rate_code, description) VALUES
 
 # UPDATE TABLE (with postgis information)
 
+rides_table_alter = ("""
+ALTER TABLE rides ADD COLUMN pickup_geom geometry(POINT,2163)
+""")
+
 rides_table_update = ("""
-UPDATE rides SET pickup_geom = ST_Transform(ST_SetSRID(ST_MakePoint(pickup_longitude,pickup_latitude),4326),2163),
-dropoff_geom = ST_Transform(ST_SetSRID(ST_MakePoint(dropoff_longitude,dropoff_latitude),4326),2163);
+UPDATE rides SET pickup_geom = ST_Transform(ST_SetSRID(ST_MakePoint(pickup_longitude,pickup_latitude),4326),2163), dropoff_geom = ST_Transform(ST_SetSRID(ST_MakePoint(dropoff_longitude,dropoff_latitude),4326),2163);
 """)
 
 # QUERY LISTS
@@ -112,6 +105,7 @@ create_extensions_queries = [timescaledb_extension_create, postgis_extension_cre
 drop_table_queries = [rides_table_drop, payment_types_table_drop, rates_table_drop]
 create_table_queries = [rides_table_create, payment_types_table_create, rates_table_create]
 
-insert_table_queries = [rates_copy, payment_type_table_insert, rates_table_insert]
+insert_table_queries = [payment_type_table_insert, rates_table_insert]
+alter_table_queries = [rides_table_alter]
 update_table_queries = [rides_table_update]
 
