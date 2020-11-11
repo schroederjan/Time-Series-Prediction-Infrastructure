@@ -8,3 +8,4 @@
 *.wpr
 *.wpu
 *.cfg
+timescaledb/__pycache__/
