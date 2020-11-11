@@ -4,7 +4,7 @@
 ## Table of contents
 * [Introduction](#introduction)
 * [Dependencies](#dependencies)
-* [Steps](#steps)
+* [Walkthrough](#walkthrough)
 * [Contact](#contact)
 
 ## Introduction
@@ -44,6 +44,7 @@ nyc_data=# \dt
 * [`etl.py`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/timescaledb/etl.py) Script to copy the data into the DB
 
 ## Dependencies
+### TimescaleDB
 To use this part of the project an up and running `TimescaleDB` instance is needed.
 In my case I use the `Docker` image, that includes the Postgis extension, maintained by Timescale, which can be found [here](https://hub.docker.com/r/timescale/timescaledb-postgis/). 
 If you want to learn more about how to get started with `TimescaleDB` you find more details on their official page [here](https://docs.timescale.com/latest/getting-started).
@@ -60,10 +61,24 @@ psql -h localhost -U postgres
 #create a new database
 CREATE DATABASE nyc_data;
 ```
-
 Now you should be ready to run the scripts from this part of the project.
 
-## Steps
+### Configuration Files
+For security and adjustability reasons I saved the database configurations in a separate file called: "dwh.cfg"
+The file is not present in this repo but is necessary for it to work. 
+Please place a file with the name "dwh.cfg" and the following content together with the scripts:
+```bash
+[TIMESCALEDB]
+#provides the database information for the scripts
+#does not need quotes
+HOST=localhost
+DB_NAME=nyc_data
+DB_USER=postgres
+DB_PASSWORD=<YOUR PASSWORD>
+DB_PORT=5432
+```
+
+## Walkthrough
 ### Objective 1 (Getting the data...)
 For simplification I created a script to download and extract the sample data, just run [download_sample_data.py](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/timescaledb/download_sample_data.py)
 
