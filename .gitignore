@@ -5,3 +5,6 @@
 *.yml
 *.csv
 *.tar.gz
+*.wpr
+*.wpu
+*.cfg
