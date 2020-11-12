@@ -8,18 +8,44 @@
 * [Contact](#contact)
 
 ## Introduction
-`COMING SOON`
+This part is an adaptation of [another project](https://github.com/AionosChina/interactive-shiny-analytics) of mine, maintaining an interactive shiny analytics template for time series predictions.
+
+After having our data ready in our brand new time-series database, we need a way to interact with it. Naturally, we could just send SQL queries, but this is leaving a lot of potential left out. We are connecting a `Shiny` web-application to the database.
 
 ### Objectives
 
-`COMING SOON`
+1. We want to get a `Shiny Server` running (locally or in the cloud)
+2. We want to install all necessary packages needed for the application
+3. We want to move our application to the server
+4. We want to start playing around with our data.
+5. Done! We are ready to go to the next part of the project -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
 
-X. We are ready to go to the next part of the project -> [`Airflow`]()
+### Folder Structure
 
-### Application
-* [`app.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/app.R)
+```bash
+├── app.R
+├── man
+│   ├── featured_1.png
+│   ├── featured_2.png
+│   └── featured_3.png
+├── modules
+│   ├── config.yml
+│   ├── crossvalidationModule.R
+│   ├── functions.R
+│   ├── install_packages.R
+│   ├── loadModule.R
+│   ├── packages.R
+│   └── predictModule.R
+└── README.md
+```
 
-### Modules
+### Scripts
+#### Application
+* [`app.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/app.R) this is the actual application calling several modules.
+
+#### Modules
+The modules are the heart of the application, they can be seen as puzzle pieces that can be run as standalone app or put together in the app.R file.
+
 * [`loadModule.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/loadModule.R) for loading data from the database.
 * [`crossvalidationModule.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/crossvalidationModule.R) for applying a crossvalidation test to the data.
 * [`predictionModule.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/predictionModule.R) for running prediction models on the data.
@@ -27,9 +53,25 @@ X. We are ready to go to the next part of the project -> [`Airflow`]()
 ### Other Scripts
 * [`functions.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/functions.R) holding all functions that need to be loaded by the app
 * [`packages.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/packages.R) holding all packages that need to be loaded by the app
+* [`packages.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/install_packages.R) holding all packages that need to be loaded by the app
 
 ## Dependencies
-`COMING SOON`
+For the project to work, you need to have `R` installed, `Shiny Server` installed and running and all required R packages installed.
+
+### [R](https://www.r-project.org/)
+All versions of R (>= 3.6.3) should be fine. If you need more help with R and RStudio, you can find detailed instructions [here](https://rstudio.com/products/rstudio/download/#download).
+
+### [Shiny](http://shiny.rstudio.com/tutorial/)
+If you have never programmed a Shiny app before, I recommend you to check out the [Shiny Tutorial](http://shiny.rstudio.com/tutorial/). It explains the framework in-depth, walks you through building a simple application, and includes extensive annotated examples.
+
+NOTE: I am using the new `Shiny` (>1.5.0) and apply the `moduleServer` instead of the `callModule` function as per documentation.
+
+### R Packages
+In my experience, there should be no big problem with different versions of R packages in this project. Just install the packages manually as usual or run the file [install_packages.R](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny/modules/install_packages.R) like this:
+```bash
+#cd to file location and run
+R install_packages.R
+```
 
 ### Configuration Files
 For security and adjustability reasons I saved the database password in a yaml file called: "config.yml"
@@ -41,13 +83,28 @@ TIMESCALEDB:
 ```
 
 ## Walkthrough
-### loadModule
+### Objective 1 (Get the application server running...)
+`COMING SOON`
+
+### Objective 2 (Get the packages installed...)
+Please check: [Dependencies](#dependencies)
+
+### Objective 3 (Get the application files on to the server...)
+`COMING SOON`
+
+### Objective 4 (Playing around with the data...)
+And finally we can use the application. Below we will go only briefly through the modules and what they are supposed to do. For more details check the blog entry. (When ready it should be on my [website](schroederjan.com))
+
+#### loadModule
+This module will connect to the `timescaleDB` instance on the localhost and log in with your default credentials from the last part (and the password in the config.yml file). After the connection is established we can play around with the aggregation function of the database and see the data visualized immediately. You can see that the aggregation degree of the data will have an impact on the ACF tests below.
 ![](man/featured_1.png)
 
-### crossvalidationModule
+#### crossvalidationModule
+This module will take the aggregated data from module one and run a crossvalidation function on it, including visualization and accuracy tests.
 ![](man/featured_2.png)
 
-### predictionModule
+#### predictionModule
+This module will show more details of the prediction algorithm applied and together with the crossvalidation will let us know if a prediction is reasonable or not.
 ![](man/featured_3.png)
 
 ## Contact
