@@ -1,6 +1,18 @@
 # Time Series Prediction Infrastructure
 > This is the main page of the deep dive into the project
 
+### ATTENTION
+To successfully set up this project you need to know at least basics of:
+
+* R
+* Python
+* Linux (for cloud setup)
+* AWS EC2 (for cloud setup)
+* PostgreSQL (for Part I)
+* Docker (for Part I + III)
+* Airflow (for Part III)
+* How to run scripts from the command line
+
 ## Table of contents
 * [Introduction](#introduction)
 * [Background](#background)
