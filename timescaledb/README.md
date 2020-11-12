@@ -52,7 +52,12 @@ If you want to learn more about how to get started with `TimescaleDB` you find m
 Once `TimescaleDB` is running you need to create a new database with the name `nyc_data`, using the following psql command provided by PostgreSQL.
 
 Make sure you have `psql` installed on your system. 
-It comes with a standard PostgreSQL installation you can find [here](https://www.postgresql.org/download/).
+It comes with a standard PostgreSQL installation you can find [here](https://www.postgresql.org/download/), or you install the `psql` client like this:
+
+```bash
+#install postgres client
+sudo apt-get install postgresql-client
+```
 
 ```bash
 #log into your TimescaleDB instance
