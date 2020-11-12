@@ -16,7 +16,7 @@ In this project we will use one of the more and more popular "Time Series" datab
 2. We want to set up a database instance (`TimescaleDB`)
 3. We want to create tables
 4. We want to load the data into the tables
-5. We are ready to go to the next part of the project -> [`Shiny Server`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny)
+5. Done! We are ready to go to the next part of the project -> [`Shiny Server`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny)
 
 ### Data
 In general you could use any time-series data, however, when you do not want to change the scripts of this project you can stick with the sample data. The sample data is from the TimescaleDB tutorial in their documentation and can be found [here](https://docs.timescale.com/latest/tutorials/tutorial-hello-timescale)

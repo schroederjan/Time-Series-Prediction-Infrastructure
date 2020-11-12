@@ -53,7 +53,7 @@ The modules are the heart of the application, they can be seen as puzzle pieces 
 ### Other Scripts
 * [`functions.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/functions.R) holding all functions that need to be loaded by the app
 * [`packages.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/packages.R) holding all packages that need to be loaded by the app
-* [`packages.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/install_packages.R) holding all packages that need to be loaded by the app
+* [`install_packages.R`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/shiny/modules/install_packages.R) script for installing all package dependencies in R
 
 ## Dependencies
 For the project to work, you need to have `R` installed, `Shiny Server` installed and running and all required R packages installed.
@@ -72,6 +72,7 @@ In my experience, there should be no big problem with different versions of R pa
 #cd to file location and run
 R install_packages.R
 ```
+When you are working on Linux you will probably need to install some additional OS packages. PLease take the information from the error message when the R package installation fails.
 
 ### Configuration Files
 For security and adjustability reasons I saved the database password in a yaml file called: "config.yml"
@@ -106,6 +107,9 @@ This module will take the aggregated data from module one and run a crossvalidat
 #### predictionModule
 This module will show more details of the prediction algorithm applied and together with the crossvalidation will let us know if a prediction is reasonable or not.
 ![](man/featured_3.png)
+
+### Objective 5 (Done!)
+Let's continue with the next part of the project  -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
 
 ## Contact
 Created by [Jan Schroeder](https://www.schroederjan.com/) - feel free to contact me!
