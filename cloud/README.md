@@ -134,11 +134,10 @@ server {
 
 #save and done
 ```
-Now the `Shiny Server` should host the application and you can visit it here:
-http://<Public IPv4 DNS>:3838/Time-Series-Prediction-Infrastructure/shiny
+Now the `Shiny Server` should host the application and should be reachable like this:
+[http://<Public IPv4 DNS>:3838/Time-Series-Prediction-Infrastructure/shiny/Time-Series-Prediction-Infrastructure/shiny/](http://ec2-18-159-212-161.eu-central-1.compute.amazonaws.com:3838/Time-Series-Prediction-Infrastructure/shiny/Time-Series-Prediction-Infrastructure/shiny/)
 
 ## Setup Airflow
-
 OPTIONAL `COMING SOON`
 
 ## Contact
