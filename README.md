@@ -64,11 +64,11 @@ Each of the core technologies has a sub-readme linked to it for a deep dive into
 ## Local Setup
 * `Part I` - Get the back-end database `TimesceleDB` running and move your data into it [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/timescaledb).
 * `Part II` - Get the front-end data application server `Shiny` up and running [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny).
-* `Part III` - Get your workflow engine `Airflow` up and running [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow). `COMING SOON`
+* OPTIONAL `Part III` - Get your workflow engine `Airflow` up and running [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow). `COMING SOON`
 
 ## Cloud Setup
 To avoid costs, an AWS EC2 instance with an Ubuntu image is all we need to move this project to the cloud.
-I will go into details how to do it manually [here](). `COMING SOON`
+I will go into details how to do it manually [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/cloud).
 
 ## Status
 The project is _in progress_ and will be expanded with new features regularly.
@@ -76,9 +76,7 @@ My goal is it to build a state of the art "Time Series Prediction Infrastructure
 
 ### To-do list:
 
-* Part 2: Shiny Server (+ App)
-* Part 3: Airflow
-* Cloud Setup
+* OPTTIONAL Part 3: Airflow
 
 ## Inspiration
 

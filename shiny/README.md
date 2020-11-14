@@ -70,7 +70,7 @@ NOTE: I am using the new `Shiny` (>1.5.0) and apply the `moduleServer` instead o
 In my experience, there should be no big problem with different versions of R packages in this project. Just install the packages manually as usual or run the file [install_packages.R](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/shiny/modules/install_packages.R) like this:
 ```bash
 #cd to file location and run
-R install_packages.R
+Rscript install_packages.R
 ```
 When you are working on Linux you will probably need to install some additional OS packages. PLease take the information from the error message when the R package installation fails.
 
@@ -85,7 +85,7 @@ TIMESCALEDB:
 
 ## Walkthrough
 ### Objective 1 (Get the application server running...)
-`COMING SOON`
+The easiest way to get shiny up and running for both locally and in the cloud is with a docker container.
 
 ### Objective 2 (Get the packages installed...)
 Please check: [Dependencies](#dependencies)

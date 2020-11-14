@@ -1,5 +1,5 @@
 # Time Series Prediction Infrastructure - Airflow
-> This is part 3 of the deep dive into the project
+> This is the optional part 3 of the deep dive into the project
 
 ## Table of contents
 * [Introduction](#introduction)
