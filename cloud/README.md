@@ -20,7 +20,7 @@ Because there is no (not yet) AMI image available for this infrastructure, we wi
 
 I provide this [script](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/blob/main/cloud/aws-vm-ubuntu.sh) to create a temporary EC2 instance, which we can then SSH into. After everyting is done we can just press [ENTER] and the instance will be terminated. The script is a modified version of Michael Wittigs "AWS in Action", which you can find [here](https://github.com/AWSinAction/code2/blob/master/chapter04/virtualmachine.sh).
 
-If you want a more permanent testing environment, please create your own instance with Ubuntu and at least 30GB storage. (free tier is possible)
+If you want a more permanent testing environment, please create your own instance with Ubuntu and at least 30GB storage and a t3.medium instance. (free tier not possible)
 
 ### Security Group Settings
 Make also sure that the following ports are open.
