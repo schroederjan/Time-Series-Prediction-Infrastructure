@@ -46,7 +46,13 @@ nyc_data=# \dt
 ## Dependencies
 ### TimescaleDB
 To use this part of the project an up and running `TimescaleDB` instance is needed.
-In my case I use the `Docker` image, that includes the Postgis extension, maintained by Timescale, which can be found [here](https://hub.docker.com/r/timescale/timescaledb-postgis/). 
+In my case I use the `Docker` image, that includes the PostGIS extension, maintained by Timescale, which can be found [here](https://hub.docker.com/r/timescale/timescaledb-postgis/). 
+
+```bash
+#import docker image for timescaleDB (with GIS)
+sudo docker run -d --name timescaledb-gis -p 5432:5432 --restart unless-stopped -e POSTGRES_PASSWORD=PASSWORD timescale/timescaledb-postgis
+```
+
 If you want to learn more about how to get started with `TimescaleDB` you find more details on their official page [here](https://docs.timescale.com/latest/getting-started).
 
 Once `TimescaleDB` is running you need to create a new database with the name `nyc_data`, using the following psql command provided by PostgreSQL.
@@ -58,18 +64,23 @@ It comes with a standard PostgreSQL installation you can find [here](https://www
 #install postgres client
 sudo apt-get install postgresql-client
 ```
-
+Then we can use our new tool to get into the default database:
 ```bash
 #log into your TimescaleDB instance
 psql -h localhost -U postgres
 
-#create a new database
+#create a new db and log into it
 CREATE DATABASE nyc_data;
-```
-Now you should be ready to run the scripts from this part of the project.
+/c nyc_data
 
+#make sure both extensions are installed
+\dx #to check
+CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+```
 ### Configuration Files
-For security and adjustability reasons I saved the database configurations in a separate file called: "dwh.cfg"
+For security reasons I saved the database configurations in a separate file called: "dwh.cfg"
 The file is not present in this repo but is necessary for it to work. 
 Please place a file with the name "dwh.cfg" and the following content together with the scripts:
 ```bash
@@ -82,6 +93,7 @@ DB_USER=postgres
 DB_PASSWORD=<YOUR PASSWORD>
 DB_PORT=5432
 ```
+Now you should be ready to run the scripts from this part of the project.
 
 ## Walkthrough
 ### Objective 1 (Getting the data...)

@@ -14,11 +14,11 @@ After having our data ready in our brand new time-series database, we need a way
 
 ### Objectives
 
-1. We want to get a `Shiny Server` running (locally or in the cloud)
-2. We want to install all necessary packages needed for the application
-3. We want to move our application to the server
+1. We want to get `Shiny` (locally) or a `Shiny Server` (in the cloud) running.
+2. We want to install all necessary packages needed for the application.
+3. We want to move our application to the server (in the cloud).
 4. We want to start playing around with our data.
-5. Done! We are ready to go to the next part of the project -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
+5. Done! We are ready to go to the next (optional) part of the project -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
 
 ### Folder Structure
 
@@ -85,19 +85,23 @@ TIMESCALEDB:
 
 ## Walkthrough
 ### Objective 1 (Get the application server running...)
-The easiest way to get shiny up and running for both locally and in the cloud is with a docker container.
+
+When running the application locally, for testing, it is best just to install R, RStudio and Shiny on your machine by following this explanation [here](https://github.com/AionosChina/interactive-shiny-analytics#dependencies) and then start the `app.R` file as with any Shiny application.
+
+When running on a server you want to install the `Shiny Server`, which I will showcase [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/cloud#setup-shiny).
 
 ### Objective 2 (Get the packages installed...)
 Please check: [Dependencies](#dependencies)
 
 ### Objective 3 (Get the application files on to the server...)
-`COMING SOON`
+When running locally with RStudio there has nothing to be done. Just run the `app.R` file inside RStudio.
+With `Shiny Server` you can check it [here](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/cloud#setup-shiny) as well.
 
 ### Objective 4 (Playing around with the data...)
 And finally we can use the application. Below we will go only briefly through the modules and what they are supposed to do. For more details check the blog entry. (When ready it should be on my [website](schroederjan.com))
 
 #### loadModule
-This module will connect to the `timescaleDB` instance on the localhost and log in with your default credentials from the last part (and the password in the config.yml file). After the connection is established we can play around with the aggregation function of the database and see the data visualized immediately. You can see that the aggregation degree of the data will have an impact on the ACF tests below.
+This module will connect to the `timescaleDB` instance on the local host and log in with your default credentials from the last part (and the password in the config.yml file). After the connection is established we can play around with the aggregation function of the database and see the data visualized immediately. You can see that the aggregation degree of the data will have an impact on the ACF tests below.
 ![](man/featured_1.png)
 
 #### crossvalidationModule
@@ -109,7 +113,7 @@ This module will show more details of the prediction algorithm applied and toget
 ![](man/featured_3.png)
 
 ### Objective 5 (Done!)
-Let's continue with the next part of the project  -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
+Let's continue with the next (optional) part of the project -> [`Airflow`](https://github.com/AionosChina/Time-Series-Prediction-Infrastructure/tree/main/airflow)
 
 ## Contact
 Created by [Jan Schroeder](https://www.schroederjan.com/) - feel free to contact me!
