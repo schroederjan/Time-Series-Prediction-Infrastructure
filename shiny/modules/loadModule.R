@@ -2,11 +2,12 @@
 # Load Module
 #
 
+config = yaml.load_file("modules/config.yml") #password from yml file 
+
 #PACKAGES
 #uncomment when testing standalone
 #source("packages.R")
 #source("functions.R")
-#config = yaml.load_file("config.yml") #password from yml file 
 
 #CONFIGURATIONS
 # database configurations
@@ -53,7 +54,7 @@ loadServer <- function(id, stringsAsFactors) {
         value_config = input$value_config 
         table_config = input$table_config 
         
-        data <- import_data_from_db(con, time_config, index, value, table)
+        data <- import_data_from_db(con, time_config, index_config, value_config, table_config)
         
         return(data)
         
